@@ -1,7 +1,7 @@
 import { AfterViewInit, ComponentFactoryResolver, Directive, Inject, Injector, OnDestroy, ViewContainerRef } from '@angular/core';
 import { ToasterService } from './toaster.service';
 import { TOASTER_CONFIG } from './tokens';
-import { delay, tap } from 'rxjs/operators';
+import { tap, throttleTime, delay } from 'rxjs/operators';
 import { ToasterConfigI } from './models';
 import { Subject } from 'rxjs';
 import { ToasterTemplate } from './toaster-component/toaster-template';
@@ -11,7 +11,7 @@ import { ToasterTemplate } from './toaster-component/toaster-template';
 })
 export class ToasterInsertDirective implements AfterViewInit, OnDestroy {
 
-  private defaultDuration: number = 5000;
+  private duration: number;
   private unsubscribe$: Subject<void> = new Subject();
 
   constructor(
@@ -20,12 +20,15 @@ export class ToasterInsertDirective implements AfterViewInit, OnDestroy {
     private toasterService: ToasterService,
     private cfr: ComponentFactoryResolver,
     @Inject(TOASTER_CONFIG) private config: ToasterConfigI,
-  ) {}
+  ) {
+    this.duration = !this.config.duration ? 5000 : this.config.duration;
+  }
 
   ngAfterViewInit(): void {
 
    this.toasterService.currentToaster$
      .pipe(
+       throttleTime(this.duration),
        tap(({ type, message }) => {
 
          const componentFactory = this.cfr.resolveComponentFactory(ToasterTemplate);
@@ -38,7 +41,7 @@ export class ToasterInsertDirective implements AfterViewInit, OnDestroy {
          componentRef.changeDetectorRef.detectChanges();
          this.viewRef.insert(componentRef.hostView);
        }),
-       delay(this.defaultDuration),
+       delay(this.duration),
        tap(() => this.viewRef.clear())
      )
      .subscribe();

@@ -31,7 +31,6 @@ export interface ToasterConfigI {
   error?: ToasterStylesI;
   positionClass?: string;
   duration?: number;
-  withBottomBorder?: boolean;
 }
 
 
