@@ -1,17 +1,32 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { ToasterComponent } from './toaster.component';
+import { ToasterService } from './toaster.service';
+import { TOASTER_COMPONENTS_MAP, TOASTER_CONFIG } from './tokens/tokens';
+import { ToasterInsertDirective } from './directives/toaster-insert.directive';
+import { NotificationToasterComponent } from './components/notification-toaster/notification-toaster.component';
+import { toasterComponentsMap } from './components.map';
+import { ToasterBaseComponent } from './components/toaster-base/toaster-base.component';
 
 @NgModule({
-  declarations: [ToasterComponent],
+  declarations: [NotificationToasterComponent, ToasterBaseComponent, ToasterInsertDirective],
   imports: [],
-  exports: [ToasterComponent]
+  providers: [ToasterService],
+  exports: [ToasterBaseComponent]
 })
 export class ToasterModule {
 
-  static forRoot(): ModuleWithProviders<ToasterModule> {
+  static forRoot(config = {}): ModuleWithProviders<ToasterModule> {
     return {
       ngModule: ToasterModule,
-      providers: []
+      providers: [
+        {
+          provide: TOASTER_CONFIG,
+          useValue: config
+        },
+        {
+          provide: TOASTER_COMPONENTS_MAP,
+          useValue: toasterComponentsMap
+        }
+      ]
     };
   }
 }
