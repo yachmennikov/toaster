@@ -1,5 +1,3 @@
-import { Type } from '@angular/core';
-
 export interface ToasterEventI {
   type: string;
   message: string;
@@ -8,12 +6,21 @@ export interface ToasterEventI {
 export interface ToasterStylesI {
     height?: string;
     width?: string;
+    color?: string;
+    backgroundColor?: string;
     boxShadow?: string;
     borderRadius?: string;
+    top?: string;
+    bottom?: string;
+    left?: string;
+    right?: string;
+    padding?: string;
 }
 
 export interface ToasterComponentI {
   message: string;
+  positionClass: string;
+  type: string;
   styles: ToasterStylesI;
 }
 
@@ -26,7 +33,5 @@ export interface ToasterConfigI {
   duration?: number;
   withBottomBorder?: boolean;
 }
-
-export type ToasterComponentMap = Map<string, Type<ToasterComponentI>>;
 
 

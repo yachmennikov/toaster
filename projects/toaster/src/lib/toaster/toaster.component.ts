@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'toaster',
-  templateUrl: 'toaster-base.component.html'
+  templateUrl: 'toaster.component.html'
 })
-export class ToasterBaseComponent {}
+export class ToasterComponent {}
