@@ -5,6 +5,7 @@ import { ToasterInsertDirective } from './directives/toaster-insert.directive';
 import { NotificationToasterComponent } from './components/notification-toaster/notification-toaster.component';
 import { toasterComponentsMap } from './components.map';
 import { ToasterBaseComponent } from './components/toaster-base/toaster-base.component';
+import { ToasterConfigI } from './models';
 
 @NgModule({
   declarations: [NotificationToasterComponent, ToasterBaseComponent, ToasterInsertDirective],
@@ -14,7 +15,7 @@ import { ToasterBaseComponent } from './components/toaster-base/toaster-base.com
 })
 export class ToasterModule {
 
-  static forRoot(config = {}): ModuleWithProviders<ToasterModule> {
+  static forRoot(config: ToasterConfigI = {}): ModuleWithProviders<ToasterModule> {
     return {
       ngModule: ToasterModule,
       providers: [
