@@ -123,6 +123,46 @@
           }
         }
       }
+    },
+    "Toaster": {
+      "projectType": "library",
+      "root": "projects/toaster",
+      "sourceRoot": "projects/toaster/src",
+      "prefix": "sy",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/toaster/tsconfig.lib.json",
+            "project": "projects/toaster/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/toaster/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/toaster/src/test.ts",
+            "tsConfig": "projects/toaster/tsconfig.spec.json",
+            "karmaConfig": "projects/toaster/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/toaster/tsconfig.lib.json",
+              "projects/toaster/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "toaster"
 }
