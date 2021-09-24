@@ -1,12 +1,12 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { ToasterService } from './toaster.service';
+import { ToasterService } from './services/toaster.service';
 import { TOASTER_CONFIG } from './tokens';
 import { ToasterInsertDirective } from './toaster-insert.directive';
 import { ToasterComponent } from './toaster-component/toaster.component';
-import { ToasterWrapperComponent } from './toaster-wrapper/toaster-wrapper..component';
+import { ToasterWrapperComponent } from './toaster-wrapper/toaster-wrapper.component';
 import { ToasterConfigI } from './models';
 import { CommonModule } from '@angular/common';
-import { MountService } from './mount.service';
+import { MountService } from './services/mount.service';
 
 @NgModule({
   declarations: [ToasterComponent, ToasterWrapperComponent, ToasterInsertDirective],

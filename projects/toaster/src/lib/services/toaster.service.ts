@@ -1,7 +1,6 @@
-import {Inject, Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { ToasterEventI } from './models';
-import {DOCUMENT} from '@angular/common';
+import { ToasterEventI } from '../models';
 
 @Injectable()
 export class ToasterService {

@@ -8,7 +8,7 @@ import {
   OnDestroy,
   Renderer2,
 } from '@angular/core';
-import { ToasterService } from './toaster.service';
+import { ToasterService } from './services/toaster.service';
 import { TOASTER_CONFIG } from './tokens';
 import { tap, delay } from 'rxjs/operators';
 import { ToasterConfigI } from './models';
