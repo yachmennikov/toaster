@@ -13,7 +13,7 @@ import { TOASTER_CONFIG } from './tokens';
 import { tap, delay } from 'rxjs/operators';
 import { ToasterConfigI } from './models';
 import { Subject } from 'rxjs';
-import { ToasterTemplate } from './toaster-component/toaster-template';
+import { ToasterComponent } from './toaster-component/toaster.component';
 
 
 @Directive({
@@ -43,7 +43,7 @@ export class ToasterInsertDirective implements AfterViewInit, OnDestroy {
      .pipe(
        tap(({ type, message }) => {
 
-         const componentRef = this.cfr.resolveComponentFactory(ToasterTemplate).create(this.injector);
+         const componentRef = this.cfr.resolveComponentFactory(ToasterComponent).create(this.injector);
 
          const parent = this.elementRef.nativeElement;
          parent.classList.add(this.config.positionClass || 'top-right');

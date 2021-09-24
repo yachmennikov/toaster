@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { ToasterEventI } from './models';
+import {DOCUMENT} from '@angular/common';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ToasterService {
 
   public get currentToaster$(): Observable<ToasterEventI> {

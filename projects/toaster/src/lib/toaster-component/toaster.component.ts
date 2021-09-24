@@ -3,10 +3,10 @@ import { ToasterComponentI, ToasterStylesI } from '../models';
 
 @Component({
   selector: 'sy-toaster-template',
-  templateUrl: 'toaster-template.html',
-  styleUrls: ['toaster-template.less']
+  templateUrl: 'toaster.component.html',
+  styleUrls: ['toaster.component.less']
 })
-export class ToasterTemplate implements ToasterComponentI {
+export class ToasterComponent implements ToasterComponentI {
 
   @Input() message: string;
   @Input() type: string;
