@@ -22,6 +22,7 @@ import { ToasterTemplate } from './toaster-component/toaster-template';
 export class ToasterInsertDirective implements AfterViewInit, OnDestroy {
 
   private duration: number;
+  private isSingleMode: boolean;
   private unsubscribe$: Subject<void> = new Subject();
 
   constructor(
@@ -33,6 +34,7 @@ export class ToasterInsertDirective implements AfterViewInit, OnDestroy {
     @Inject(TOASTER_CONFIG) private config: ToasterConfigI,
   ) {
     this.duration = this.config.duration || 5000;
+    this.isSingleMode = this.config.isSingleMode || false;
   }
 
   ngAfterViewInit(): void {
@@ -50,10 +52,19 @@ export class ToasterInsertDirective implements AfterViewInit, OnDestroy {
          componentRef.instance.styles = !this.config[type] ? {} : this.config[type];
          componentRef.instance.type = type;
          componentRef.changeDetectorRef.detectChanges();
+
+         if (this.isSingleMode && parent.children.length) { parent.innerHTML = ''; }
+
          this.renderer.appendChild(parent, componentRef.location.nativeElement);
        }),
        delay(this.duration),
-       tap(() => this.renderer.removeChild(parent, this.elementRef.nativeElement.children[0]))
+       tap(() => {
+         const parent = this.elementRef.nativeElement;
+
+         if (parent.children.length) {
+           this.renderer.removeChild(parent, parent.children[0]);
+         }
+       })
      )
      .subscribe();
   }

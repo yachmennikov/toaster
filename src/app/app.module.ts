@@ -18,6 +18,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
       notification: {
         borderRadius: '5px'
       },
+      // isSingleMode: true,
     }),
     BrowserAnimationsModule,
     ButtonsModule.forRoot()
