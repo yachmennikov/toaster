@@ -1,7 +1,7 @@
 import { AfterViewInit, ComponentFactoryResolver, Directive, Inject, Injector, OnDestroy, ViewContainerRef } from '@angular/core';
 import { ToasterService } from './toaster.service';
 import { TOASTER_CONFIG } from './tokens';
-import { tap, throttleTime, delay } from 'rxjs/operators';
+import { tap, delay } from 'rxjs/operators';
 import { ToasterConfigI } from './models';
 import { Subject } from 'rxjs';
 import { ToasterTemplate } from './toaster-component/toaster-template';
@@ -21,14 +21,13 @@ export class ToasterInsertDirective implements AfterViewInit, OnDestroy {
     private cfr: ComponentFactoryResolver,
     @Inject(TOASTER_CONFIG) private config: ToasterConfigI,
   ) {
-    this.duration = !this.config.duration ? 5000 : this.config.duration;
+    this.duration = this.config.duration || 5000;
   }
 
   ngAfterViewInit(): void {
 
    this.toasterService.currentToaster$
      .pipe(
-       throttleTime(this.duration),
        tap(({ type, message }) => {
 
          const componentFactory = this.cfr.resolveComponentFactory(ToasterTemplate);
