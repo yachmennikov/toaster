@@ -17,7 +17,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
       duration: 2500,
       notification: {
         borderRadius: '5px'
-      }
+      },
     }),
     BrowserAnimationsModule,
     ButtonsModule.forRoot()

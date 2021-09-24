@@ -10,16 +10,12 @@ export interface ToasterStylesI {
     backgroundColor?: string;
     boxShadow?: string;
     borderRadius?: string;
-    top?: string;
-    bottom?: string;
-    left?: string;
-    right?: string;
+    margin?: string;
     padding?: string;
 }
 
 export interface ToasterComponentI {
   message: string;
-  positionClass: string;
   type: string;
   styles: ToasterStylesI;
 }

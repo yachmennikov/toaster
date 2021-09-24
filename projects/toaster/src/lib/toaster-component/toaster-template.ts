@@ -9,7 +9,6 @@ import { ToasterComponentI, ToasterStylesI } from '../models';
 export class ToasterTemplate implements ToasterComponentI {
 
   @Input() message: string;
-  @Input() positionClass: string;
   @Input() type: string;
   @Input() styles: ToasterStylesI;
 
@@ -20,26 +19,19 @@ export class ToasterTemplate implements ToasterComponentI {
     error: '#dc3545'
   };
 
-  public getPositionClass(): { [key: string]: boolean } {
-    return { [!this.positionClass ? 'top-right' : this.positionClass]: true };
-  }
-
   public getStylesList(): { [key: string]: string } {
 
-    const { height, width, color, backgroundColor, boxShadow, borderRadius, top, bottom, left, right, padding } = this.styles;
+    const { height, width, color, backgroundColor, boxShadow, borderRadius, padding, margin } = this.styles;
 
     return {
       height: !height ? '50px' : height,
       width: !width ? '300px' : width,
       padding: !padding ? ' 0 15px' : padding,
+      margin: !margin ? ' 0 0 5px 0' : margin,
       color: !color ? '#fff' : color,
       backgroundColor: !backgroundColor ? this.colorMap[this.type] : backgroundColor,
       ...(boxShadow && { boxShadow }),
       ...(borderRadius && { borderRadius }),
-      ...(top && { top }),
-      ...(bottom && { bottom }),
-      ...(left && { left }),
-      ...(right && { right }),
     };
   }
 
